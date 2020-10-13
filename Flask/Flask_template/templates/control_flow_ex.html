@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+          <head>
+                    <meta charset="utf-8">
+                    <title>This is title</title>
+          </head>
+          <body>
+                    {%for item in puppies%}
+                              {%if item[-1] == 'y'%}
+                                        <p>{{"Name: " + item + ", Latin name:" + item[:-1] + "iful"}}</p>
+                              {%else%}
+                                        <p>{{"Name: " + item + ", Latin name:" + item + "y"}}</p>
+                              {%endif%}
+                    {%endfor%}
+          </body>
+</html>

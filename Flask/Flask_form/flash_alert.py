@@ -1,0 +1,28 @@
+from flask import Flask, render_template, redirect, flash, url_for, session
+from flask_wtf import FlaskForm
+from wtforms import SubmitField, StringField
+
+app = Flask(__name__)
+
+app.config['SECRET_KEY'] = "abcdefghijklm"
+
+
+class SimpleForm(FlaskForm):
+    breed = StringField("What breed are you?")
+    submit = SubmitField("Hit me!")
+
+
+@app.route('/', methods=['GET', 'POST'])
+def index():
+    form = SimpleForm()
+
+    if form.validate_on_submit():
+        session['breed'] = form.breed.data
+        flash("You just changed your breed to: ")
+        return redirect(url_for('index'))
+
+    return render_template("flash_alert.html", form=form)
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
